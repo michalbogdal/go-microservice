@@ -17,3 +17,11 @@ table:
     password varchar(256)  NOT NULL
   )
 ```
+
+Using different ways how to handle database
+* viaGlobalVariable - db connection is kept in global variable and reused by models
+* viaIncjection - db connection is past as a parameter to model
+* viaInterface - db connection is hidden behind interface and models are past as a parameter
+
+based on:
+http://www.alexedwards.net/blog/organising-database-access
