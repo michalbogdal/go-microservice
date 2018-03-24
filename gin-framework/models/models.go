@@ -5,7 +5,6 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-
 type User struct {
 	ID       int    `json:"id" db:"id"`
 	Name     string `json:"name" db:"name"`
@@ -13,11 +12,10 @@ type User struct {
 	Password string `json:"password" db:"password"`
 }
 
-
 func (db *DB) Get(id int) (*User, error) {
-	var u *User
-	err := db.DB.Get(u, "SELECT name, email from users Where id=$1", id)
-	return u, err
+	var u User
+	err := db.DB.Get(&u, "SELECT id, name, email from users Where id=$1", id)
+	return &u, err
 }
 
 func (db *DB) Update(u *User) error {
@@ -40,10 +38,10 @@ func (db *DB) Create(u *User) error {
 	if err != nil {
 		return err
 	}
-	return db.QueryRow("INSERT INTO users(name, email, password) VALUES($1,$2,$3) RETURNING id", u.Name, u.Email, string(hashedPassword)).Scan(u.ID)
+	return db.QueryRow("INSERT INTO users(name, email, password) VALUES($1,$2,$3) RETURNING id", &u.Name, &u.Email, string(hashedPassword)).Scan(&u.ID)
 }
 
-func (db *DB)List(start, count int) ([]*User, error) {
+func (db *DB) List(start, count int) ([]*User, error) {
 	users := []*User{}
 	err := db.Select(&users, "SELECT id, name, email FROM users LIMIT $1 OFFSET $2", count, start)
 	if err != nil {
