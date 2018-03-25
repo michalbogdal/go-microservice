@@ -18,10 +18,13 @@ table:
   )
 ```
 
-Using different ways how to handle database
+Testing different approaches about how to create db layer
+inspired by http://www.alexedwards.net/blog/organising-database-access
+ 
 * viaGlobalVariable - db connection is kept in global variable and reused by models
 * viaIncjection - db connection is past as a parameter to model
 * viaInterface - db connection is hidden behind interface and models are past as a parameter
 
-based on:
-http://www.alexedwards.net/blog/organising-database-access
+Tested gin web framework and command line parsers (flag)
+* gin-framework
+
