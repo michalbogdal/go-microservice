@@ -28,3 +28,20 @@ inspired by http://www.alexedwards.net/blog/organising-database-access
 Tested gin web framework and command line parsers (flag)
 * gin-framework
 
+Requests:
+
+```shell
+curl -i -X GET -H "Content-Type:application/json" http://localhost:8080/v1/users
+```
+
+```shell
+curl -i -X POST -H "Content-Type:application/json" http://localhost:8080/v1/user -d '{ "name":"michal","email":"michal@mmm.pl", "password":"12345"}'
+```
+
+```shell
+curl -i -X PUT -H "Content-Type:application/json" http://localhost:8080/v1/user/1 -d '{ "name":"michal","email":"michal@mmm.pl", "password":"12345"}'
+```
+
+```shell
+curl -i -X DELETE -H "Content-Type:application/json" http://localhost:8080/v1/user/1
+```

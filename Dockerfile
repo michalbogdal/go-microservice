@@ -11,7 +11,6 @@ RUN go get github.com/gin-gonic/gin; \
  go get github.com/lib/pq; \
  go get golang.org/x/crypto/bcrypt
 
-COPY resources/ ${SOURCES}/resources/
 COPY gin-framework/ ${SOURCES}/gin-framework/
 
 RUN cd ${SOURCES}gin-framework && CGO_ENABLED=0 go build -o goapp
@@ -22,6 +21,5 @@ FROM alpine
 WORKDIR /app
 ENV SOURCES /go/src/go-microservice/
 COPY --from=build-env ${SOURCES}/gin-framework/ /app/gin-framework/
-COPY --from=build-env ${SOURCES}/resources/ /app/resources/
 
 ENTRYPOINT cd gin-framework && ./goapp

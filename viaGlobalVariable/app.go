@@ -8,10 +8,10 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
+	"go-microservice/viaGlobalVariable/models"
 	"log"
 	"net/http"
 	"strconv"
-	"go-microservice/viaGlobalVariable/models"
 )
 
 type App struct {

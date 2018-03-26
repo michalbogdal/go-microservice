@@ -15,7 +15,7 @@ type User struct {
 
 var db *sqlx.DB
 
-func InitializeDb(database *sqlx.DB){
+func InitializeDb(database *sqlx.DB) {
 	db = database
 }
 

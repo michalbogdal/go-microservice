@@ -8,14 +8,14 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
+	"go-microservice/viaInteface/models"
 	"log"
 	"net/http"
 	"strconv"
-	"go-microservice/viaInteface/models"
 )
 
 type App struct {
-	db models.Datastore
+	db     models.Datastore
 	Router *mux.Router
 }
 
