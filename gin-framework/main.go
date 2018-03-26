@@ -1,26 +1,18 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
-	"github.com/spf13/viper"
 	"log"
+	"os"
 )
 
 func main() {
 
-	configFile := flag.String("configFile", "../resources/config.json", "config file")
-	flag.Parse()
-
-	viper.SetConfigFile(*configFile)
-	viper.ReadInConfig()
-
-	username := viper.GetString("database.user")
-	password := viper.GetString("database.password")
-	hostName := viper.GetString("database.hostname")
-	appPort := viper.GetString("host.port")
+	username := os.Getenv("POSTGRES_USER");
+	password := os.Getenv("POSTGRES_PASSWORD")
+	hostName := os.Getenv("POSTGRES_HOST")
 
 	connectionString := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=disable",
 		hostName,
@@ -33,8 +25,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("starting app on port", appPort)
 	a := App{}
 	a.Initialize(db)
-	a.Run(":" + appPort)
+	a.Run(":8080")
 }
