@@ -6,9 +6,6 @@ services:
       - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=fred
-    networks:
-        vpcbr:
-          ipv4_address: 10.5.0.5
   web:
     build: .
     ports:
@@ -18,14 +15,4 @@ services:
     environment:
      - POSTGRES_USER=postgres
      - POSTGRES_PASSWORD=fred
-     - POSTGRES_HOST=10.5.0.5
-    networks:
-        vpcbr:
-          ipv4_address: 10.5.0.6
-
-networks:
-  vpcbr:
-    driver: bridge
-    ipam:
-     config:
-       - subnet: 10.5.0.0/16
+     - POSTGRES_HOST=postgres
